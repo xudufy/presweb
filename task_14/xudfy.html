@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 65],
+  ["福州", 50],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+
+  qsort(aqiData,0,aqiData.length-1);
+  var numOver60=0;
+  var e;
+  while (numOver60<aqiData.length && aqiData[numOver60][1]>60){
+    e=document.createElement("li")
+    e.innerHTML="第"+(numOver60+1)+"名:"+aqiData[numOver60][0]+","+aqiData[numOver60][1]+";";
+    document.getElementById("aqi-list").appendChild(e);
+    numOver60++;
+  }
+})();
+function swap(a,b,k){
+  var t=a[b];
+  a[b]=a[k];
+  a[k]=t;
+}
+function qsort(a,l,r){
+  var mid=Math.floor((l+r)/2);
+  swap(a,mid,r);
+  var i=l-1;
+  for (var j=l;j<=r;j++){
+    if (a[j][1]>=a[r][1]){
+      swap(a,++i,j);
+    }
+  }
+  if (i-l>=2) qsort(a,l,i-1);
+  if (r-l>=2) qsort(a,i+1,r);
+}
+</script>
+</body>
+</html>
